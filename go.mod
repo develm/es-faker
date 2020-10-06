@@ -1,4 +1,4 @@
-module es-social-faker
+module https://github.com:develm/es-faker
 
 go 1.15
 

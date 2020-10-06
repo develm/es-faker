@@ -15,7 +15,7 @@ import (
 
 type Reaction struct {
 	Id          int32     `json:"id"`
-	PostId      int32     `json:"post_id"`
+	ParentId    int32     `json:"parent_id"`
 	CreatedBy   string    `json:"created_by"`
 	Verb        string    `json:"verb"`
 	Reaction    string    `json:"reaction"`
@@ -48,19 +48,20 @@ func main() {
 	f := faker.New()
 	rand.Seed(time.Now().UnixNano())
 	verbs := []string{"add", "update", "delete"}
-	posibReact := []string{"like", "love", "care", "haha", "wow", "sad", "angry"}
+	possibleReactions := []string{"like", "love", "care", "haha", "wow", "sad", "angry"}
 	var reactions []Reaction
 	for i := 0; i < 100; i++ {
-		postId := rand.Int31()
+		postId := int32(rand.Int())
 		for j := 0; j < 50; j++ {
 			name := f.Person().Name()
+			id := int32(rand.Int())
 			for k := 0; k < 10; k++ {
 				reactions = append(reactions, Reaction{
-					Id:          rand.Int31(),
-					PostId:      postId,
+					Id:          id,
+					ParentId:    postId,
 					CreatedBy:   name,
 					Verb:        f.RandomStringElement(verbs),
-					Reaction:    f.RandomStringElement(posibReact),
+					Reaction:    f.RandomStringElement(possibleReactions),
 					CreatedDate: f.Time().TimeBetween(time.Now().AddDate(0, 0, -15), time.Now()),
 				})
 			}
