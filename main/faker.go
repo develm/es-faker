@@ -51,14 +51,14 @@ func main() {
 	possibleReactions := []string{"like", "love", "care", "haha", "wow", "sad", "angry"}
 	var reactions []Reaction
 	for i := 0; i < 100; i++ {
-		postId := int32(rand.Int())
+		parentId := int32(rand.Int())
 		for j := 0; j < 50; j++ {
 			name := f.Person().Name()
 			id := int32(rand.Int())
 			for k := 0; k < 10; k++ {
 				reactions = append(reactions, Reaction{
 					Id:          id,
-					ParentId:    postId,
+					ParentId:    parentId,
 					CreatedBy:   name,
 					Verb:        f.RandomStringElement(verbs),
 					Reaction:    f.RandomStringElement(possibleReactions),
